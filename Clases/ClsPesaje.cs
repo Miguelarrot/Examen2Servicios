@@ -29,12 +29,13 @@ namespace Examen2.Clases
             {
                 return "Error al registrar el pesaje: " + ex.Message;
             }
+           
         }
         public IQueryable consultarXPlaca(string placa)
         {
             return from c in DBexamen.Set<Camion>()
                        join p in DBexamen.Set<Pesaje>() on c.Placa equals p.PlacaCamion
-                       //join i in DBexamen.Set<FotoPesaje>() on p.id equals i.idFotoPesaje
+                       join i in DBexamen.Set<FotoPesaje>() on p.id equals i.idFotoPesaje
                    where p.PlacaCamion == placa
                    select new
                    {
@@ -43,8 +44,10 @@ namespace Examen2.Clases
                        c.NumeroEjes,
                        p.FechaPesaje,
                        p.Peso,
-                       //i.ImagenVehiculo
+                       i.ImagenVehiculo
                    };
         }
+       
+       
     }
 }
